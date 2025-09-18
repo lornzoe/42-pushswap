@@ -1,3 +1,7 @@
 checker_linux
 push_swap_test_linux.sh
 pro_checker
+*.o
+0
+traces.txt
+push_swap

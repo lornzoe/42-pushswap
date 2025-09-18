@@ -6,7 +6,7 @@
 /*   By: lyanga <lyanga@student.42singapore.sg>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/18 05:09:16 by lyanga            #+#    #+#             */
-/*   Updated: 2025/09/18 16:21:34 by lyanga           ###   ########.fr       */
+/*   Updated: 2025/09/18 18:52:27 by lyanga           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,11 @@ t_stack	*stack_last(t_stack *head);
 size_t	stack_size(t_stack *head);
 int		stack_biggest(t_stack *head);
 int		stack_issorted(t_stack *head);
+
+// validations
+int	validate_argv(int argc, char **argv);
+int validate_values(t_stack *head, char **argv);
+
 
 // instructions
 void	swap(t_stack **head);

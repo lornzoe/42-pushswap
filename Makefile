@@ -6,7 +6,7 @@
 #    By: lyanga <lyanga@student.42singapore.sg>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/09/18 05:19:35 by lyanga            #+#    #+#              #
-#    Updated: 2025/09/18 17:05:18 by lyanga           ###   ########.fr        #
+#    Updated: 2025/09/18 17:38:00 by lyanga           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -34,7 +34,7 @@ DIR_LIBFT =	libft/
 DIR_LIBFT_HEADERS =	libft/headers/
 LIBFT	=	$(DIR_LIBFT)libft.a
 
-PUSHSWAP_SRCS	=	main.c push.c swap.c rotate.c r_rotate.c stack_utils.c sort.c 
+PUSHSWAP_SRCS	=	main.c push.c swap.c rotate.c r_rotate.c stack_utils.c sort.c validate.c
 OBJS_PUSHSWAP	=	$(addprefix $(DIR_OBJS), $(PUSHSWAP_SRCS:.c=.o))
 
 .PHONY: all clean fclean re libft
@@ -58,7 +58,8 @@ clean:
 	@$(RM) $(OBJS_PUSHSWAP)
 
 fclean: clean
-	@echo "Cleaning library..."
+	@echo "Cleaning everything..."
+	@make -C $(DIR_LIBFT) fclean
 	@$(RM) $(NAME)
 
 re: fclean all
