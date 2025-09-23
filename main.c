@@ -6,7 +6,7 @@
 /*   By: lyanga <lyanga@student.42singapore.sg>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/18 05:33:07 by lyanga            #+#    #+#             */
-/*   Updated: 2025/09/23 08:07:27 by lyanga           ###   ########.fr       */
+/*   Updated: 2025/09/23 08:46:34 by lyanga           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,8 +50,7 @@ static t_stack *parse_argv(int argc, char **argv)
     i = 1;
     head = NULL;
     prev = NULL;
-
-    if (argc == 1)
+    if (argc == 1 || validate_argv(argc, argv) == 0)
         return (NULL);
     while (i < argc)
     {
@@ -116,6 +115,7 @@ int	main(int argc, char **argv)
 	a = parse_argv(argc, argv);
 	if (a != NULL && dupe_check(a))
 	{
+		//ft_printf("passMain\n");
 		rank_nodes(a);
 		size = stack_size(a);
 		if (!stack_issorted(a) && size <= 3)

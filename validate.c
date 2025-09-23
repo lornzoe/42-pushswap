@@ -6,7 +6,7 @@
 /*   By: lyanga <lyanga@student.42singapore.sg>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/18 17:27:12 by lyanga            #+#    #+#             */
-/*   Updated: 2025/09/23 08:06:41 by lyanga           ###   ########.fr       */
+/*   Updated: 2025/09/23 08:48:51 by lyanga           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,10 +61,12 @@ int	validate_string(char *string)
 	// 1. split up the massive string (space is seperator)
 	split = ft_split(string, ' ');
 	ptr = split;
+	if (split[0] == NULL)
+		return (0);
 	// 2. loop through the array with value_check.
 	while (ptr != NULL)
 	{
-		if (text_check(*ptr) == 0)
+		if (text_check(*ptr) == 0 || value_check(*ptr) == 0)
 		{
 			free_split(split);
 			return (0);
