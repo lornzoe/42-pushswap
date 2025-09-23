@@ -6,7 +6,7 @@
 /*   By: lyanga <lyanga@student.42singapore.sg>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/18 05:09:16 by lyanga            #+#    #+#             */
-/*   Updated: 2025/09/18 18:52:27 by lyanga           ###   ########.fr       */
+/*   Updated: 2025/09/23 08:09:33 by lyanga           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,9 @@ typedef struct s_stack {
 	struct s_stack	*next;
 }	t_stack;
 
+// printing errors
+void print_error(char *str);
+
 // stack utils
 void	stack_del(t_stack *head);
 t_stack	*stack_last(t_stack *head);
@@ -32,8 +35,6 @@ int		stack_issorted(t_stack *head);
 
 // validations
 int	validate_argv(int argc, char **argv);
-int validate_values(t_stack *head, char **argv);
-
 
 // instructions
 void	swap(t_stack **head);
@@ -56,8 +57,8 @@ void	r_rotate_b(t_stack **head);
 void	r_rotate_ab(t_stack **stack_a, t_stack **stack_b);
 
 // sorts
-void sort_three(t_stack **head);
-void sort_five(t_stack **a, t_stack **b);
-void radix_sort(t_stack **a, t_stack **b);
+void	sort_three(t_stack **head);
+void	sort_five(t_stack **a, t_stack **b);
+void	radix_sort(t_stack **a, t_stack **b);
 
 #endif

@@ -6,47 +6,59 @@
 /*   By: lyanga <lyanga@student.42singapore.sg>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/18 05:33:07 by lyanga            #+#    #+#             */
-/*   Updated: 2025/09/18 20:20:20 by lyanga           ###   ########.fr       */
+/*   Updated: 2025/09/23 08:07:27 by lyanga           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-static void print_error(char *str)
+static t_stack *parse_string(char *arg, t_stack *prev, t_stack **head)
 {
-	int	i;
+    char    **split;
+    int     j;
+    t_stack *curr;
 
-	i = 0;
-	while (str[i])
-	{
-		write(2, &str[i], 1);
-		i++;
-	}}
+    split = NULL;
+    curr = NULL;
+	j = 0;
+    split = ft_split(arg, ' ');
+    while (split[j])
+    {
+        curr = ft_calloc(1, sizeof(t_stack));
+        curr->value = ft_atoi(split[j]);
+        if (!*head)
+            *head = curr;
+        else
+            prev->next = curr;
+        prev = curr;
+        j++;
+    }
+    j = 0;
+    while (split[j])
+        free(split[j++]);
+    free(split);
+    return (prev);
+}
 
 // validate argv, if validation fails return NULL, otherwise put argv into nodes & link them
 static t_stack *parse_argv(int argc, char **argv)
 {
-	int		i;
-	t_stack *curr;
-	t_stack *prev;
-	t_stack	*head;
+    int     i;
+    t_stack *head;
+    t_stack *prev;
 
-	if (argc == 1 || !validate_argv(argc, argv))
-		return (NULL);
-	i = 1;
-	head = NULL;
-	while (i < argc)
-	{
-		curr = ft_calloc(1, sizeof(t_stack));
-		curr->value = ft_atoi(argv[i]);
-		if (i == 1)
-			head = curr;
-		else
-			prev->next = curr;
-		prev = curr;
-		i++;
-	}
-	return (head);
+    i = 1;
+    head = NULL;
+    prev = NULL;
+
+    if (argc == 1)
+        return (NULL);
+    while (i < argc)
+    {
+        prev = parse_string(argv[i], prev, &head);
+        i++;
+    }
+    return (head);
 }
 
 static void rank_nodes(t_stack *stack)
@@ -71,6 +83,29 @@ static void rank_nodes(t_stack *stack)
 	}
 }
 
+static int dupe_check(t_stack *head)
+{
+	t_stack	*i;
+	t_stack	*j;
+	int		x;
+
+	x = 1;
+	i = head;
+	while (i != NULL)
+	{
+		j = i->next;
+		while (j != NULL)
+		{
+			if (i->value == j->value)
+				return (0);
+			j = j->next;
+		}
+		i = i->next;
+		x++;
+	}
+	return (1);
+}
+
 int	main(int argc, char **argv)
 {
 	t_stack	*a;
@@ -79,7 +114,7 @@ int	main(int argc, char **argv)
 
 	b = NULL;
 	a = parse_argv(argc, argv);
-	if (a != NULL && validate_values(a, argv))
+	if (a != NULL && dupe_check(a))
 	{
 		rank_nodes(a);
 		size = stack_size(a);

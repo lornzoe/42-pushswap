@@ -6,59 +6,86 @@
 /*   By: lyanga <lyanga@student.42singapore.sg>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/18 17:27:12 by lyanga            #+#    #+#             */
-/*   Updated: 2025/09/18 19:38:21 by lyanga           ###   ########.fr       */
+/*   Updated: 2025/09/23 08:06:41 by lyanga           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "libft.h"
 #include "push_swap.h"
 
-int validate_argv(int argc, char **argv)
+static void free_split(char **arr)
 {
-	const char	*p;
-	int			i;
+    int i = 0;
 
-	i = 1;
-	while (i < argc)
+    if (!arr)
+        return;
+    while (arr[i])
+    {
+        free(arr[i]);
+        i++;
+    }
+    free(arr);
+}
+
+static int text_check(char *p)
+{
+	if (*p == '\0' || ft_strlen(p) > 11
+			|| (p[0] == '-' && p[1] == '\0') || (p[0] == '0' && p[1] != '\0'))
+			return (0);
+	if (*p == '-')
+		p++;
+	while (*p)
 	{
-		p = argv[i];
-		if (*p == '\0' || ft_strlen(p) > 11)
+		if (!ft_isdigit((unsigned char)*p))
 			return (0);
-		if ((p[0] == '-' && p[1] == '\0') || (p[0] == '0' && p[1] != '\0'))
-			return (0);
-		if (*p == '-')
-			p++;
-		while (*p)
-		{
-			if (!ft_isdigit((unsigned char)*p))
-				return (0);
-			p++;
-		}
-		i++;
+		p++;
 	}
 	return (1);
 }
 
-int validate_values(t_stack *head, char **argv)
+static int value_check(char *str)
 {
-	t_stack	*i;
-	t_stack	*j;
-	int		x;
+    long	num;
 
-	x = 1;
-	i = head;
-	while (i != NULL)
+    num = ft_atol(str);
+    if ((num > INT_MAX) || (num < INT_MIN))
+        return (0);
+    return (1);
+}
+
+//validate massive string function
+int	validate_string(char *string)
+{
+	char	**split;
+	char	**ptr;
+	// 1. split up the massive string (space is seperator)
+	split = ft_split(string, ' ');
+	ptr = split;
+	// 2. loop through the array with value_check.
+	while (ptr != NULL)
 	{
-		if ((long)i->value != ft_atol(argv[x]))
-			return (0);
-		j = i->next;
-		while (j != NULL)
+		if (text_check(*ptr) == 0)
 		{
-			if (i->value == j->value)
-				return (0);
-			j = j->next;
+			free_split(split);
+			return (0);
 		}
-		i = i->next;
-		x++;
+		ptr++;
+	}
+	return (1);
+}
+
+int validate_argv(int argc, char **argv)
+{
+	int			i;
+
+	if (argc == 2)
+		return validate_string(argv[1]);
+	i = 1;
+	while (i < argc)
+	{
+		if (text_check(argv[i]) == 0 || value_check(argv[i]) == 0)
+			return (0);
+		i++;
 	}
 	return (1);
 }
