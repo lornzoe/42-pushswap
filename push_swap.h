@@ -6,7 +6,7 @@
 /*   By: lyanga <lyanga@student.42singapore.sg>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/18 05:09:16 by lyanga            #+#    #+#             */
-/*   Updated: 2025/09/23 08:09:33 by lyanga           ###   ########.fr       */
+/*   Updated: 2025/09/23 08:55:42 by lyanga           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,14 +17,15 @@
 # include "ft_printf.h"
 
 // struct
-typedef struct s_stack {
+typedef struct s_stack
+{
 	int				value;
 	int				index;
 	struct s_stack	*next;
 }	t_stack;
 
 // printing errors
-void print_error(char *str);
+void	print_error(char *str);
 
 // stack utils
 void	stack_del(t_stack *head);
@@ -34,7 +35,7 @@ int		stack_biggest(t_stack *head);
 int		stack_issorted(t_stack *head);
 
 // validations
-int	validate_argv(int argc, char **argv);
+int		validate_argv(int argc, char **argv);
 
 // instructions
 void	swap(t_stack **head);

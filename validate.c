@@ -6,32 +6,33 @@
 /*   By: lyanga <lyanga@student.42singapore.sg>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/18 17:27:12 by lyanga            #+#    #+#             */
-/*   Updated: 2025/09/23 08:48:51 by lyanga           ###   ########.fr       */
+/*   Updated: 2025/09/23 09:05:35 by lyanga           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 #include "push_swap.h"
 
-static void free_split(char **arr)
+static void	free_split(char **arr)
 {
-    int i = 0;
+	int	i;
 
-    if (!arr)
-        return;
-    while (arr[i])
-    {
-        free(arr[i]);
-        i++;
-    }
-    free(arr);
+	i = 0;
+	if (!arr)
+		return ;
+	while (arr[i])
+	{
+		free(arr[i]);
+		i++;
+	}
+	free(arr);
 }
 
-static int text_check(char *p)
+static int	text_check(char *p)
 {
 	if (*p == '\0' || ft_strlen(p) > 11
-			|| (p[0] == '-' && p[1] == '\0') || (p[0] == '0' && p[1] != '\0'))
-			return (0);
+		|| (p[0] == '-' && p[1] == '\0') || (p[0] == '0' && p[1] != '\0'))
+		return (0);
 	if (*p == '-')
 		p++;
 	while (*p)
@@ -43,27 +44,25 @@ static int text_check(char *p)
 	return (1);
 }
 
-static int value_check(char *str)
+static int	value_check(char *str)
 {
-    long	num;
+	long	num;
 
-    num = ft_atol(str);
-    if ((num > INT_MAX) || (num < INT_MIN))
-        return (0);
-    return (1);
+	num = ft_atol(str);
+	if ((num > INT_MAX) || (num < INT_MIN))
+		return (0);
+	return (1);
 }
 
-//validate massive string function
 int	validate_string(char *string)
 {
 	char	**split;
 	char	**ptr;
-	// 1. split up the massive string (space is seperator)
+
 	split = ft_split(string, ' ');
 	ptr = split;
 	if (split[0] == NULL)
 		return (0);
-	// 2. loop through the array with value_check.
 	while (ptr != NULL)
 	{
 		if (text_check(*ptr) == 0 || value_check(*ptr) == 0)
@@ -76,12 +75,12 @@ int	validate_string(char *string)
 	return (1);
 }
 
-int validate_argv(int argc, char **argv)
+int	validate_argv(int argc, char **argv)
 {
 	int			i;
 
 	if (argc == 2)
-		return validate_string(argv[1]);
+		return (validate_string(argv[1]));
 	i = 1;
 	while (i < argc)
 	{

@@ -6,15 +6,15 @@
 /*   By: lyanga <lyanga@student.42singapore.sg>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/18 15:18:07 by lyanga            #+#    #+#             */
-/*   Updated: 2025/09/18 16:19:50 by lyanga           ###   ########.fr       */
+/*   Updated: 2025/09/23 09:01:27 by lyanga           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void stack_del(t_stack *head)
+void	stack_del(t_stack *head)
 {
-	t_stack *tmp;
+	t_stack	*tmp;
 
 	while (head)
 	{
@@ -24,7 +24,7 @@ void stack_del(t_stack *head)
 	}
 }
 
-t_stack *stack_last(t_stack *head)
+t_stack	*stack_last(t_stack *head)
 {
 	if (!head)
 		return (NULL);
@@ -33,9 +33,9 @@ t_stack *stack_last(t_stack *head)
 	return (head);
 }
 
-size_t stack_size(t_stack *head)
+size_t	stack_size(t_stack *head)
 {
-	size_t size;
+	size_t	size;
 
 	size = 0;
 	while (head)
@@ -46,9 +46,10 @@ size_t stack_size(t_stack *head)
 	return (size);
 }
 
-int stack_biggest(t_stack *head)
+int	stack_biggest(t_stack *head)
 {
-	int biggest;
+	int	biggest;
+
 	biggest = -1;
 	while (head)
 	{
@@ -59,7 +60,7 @@ int stack_biggest(t_stack *head)
 	return (biggest);
 }
 
-int stack_issorted(t_stack *head)
+int	stack_issorted(t_stack *head)
 {
 	while (head && head->next)
 	{

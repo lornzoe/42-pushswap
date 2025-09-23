@@ -6,13 +6,13 @@
 /*   By: lyanga <lyanga@student.42singapore.sg>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/23 08:05:09 by lyanga            #+#    #+#             */
-/*   Updated: 2025/09/23 08:06:30 by lyanga           ###   ########.fr       */
+/*   Updated: 2025/09/23 08:54:22 by lyanga           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void print_error(char *str)
+void	print_error(char *str)
 {
 	int	i;
 
