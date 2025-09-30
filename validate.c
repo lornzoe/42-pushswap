@@ -6,7 +6,7 @@
 /*   By: lyanga <lyanga@student.42singapore.sg>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/18 17:27:12 by lyanga            #+#    #+#             */
-/*   Updated: 2025/10/01 03:17:38 by lyanga           ###   ########.fr       */
+/*   Updated: 2025/10/01 03:42:53 by lyanga           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,7 @@ int	validate_string(char *string)
 		}
 		ptr++;
 	}
+	free_split(split);
 	return (1);
 }
 
