@@ -6,7 +6,7 @@
 /*   By: lyanga <lyanga@student.42singapore.sg>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/18 05:33:07 by lyanga            #+#    #+#             */
-/*   Updated: 2025/09/23 09:07:00 by lyanga           ###   ########.fr       */
+/*   Updated: 2025/10/01 18:32:51 by lyanga           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,12 +39,23 @@ static t_stack	*parse_string(char *arg, t_stack *prev, t_stack **head)
 	free(split);
 	return (prev);
 }
+static int *create_array(int argc, char **argv)
+{
+	int	*tokens;
+	int	tlen;	
+
+	for (int i = 1; i < argc; i++)
+	{
+		
+	}
+}
 
 static t_stack	*parse_argv(int argc, char **argv)
 {
 	int		i;
 	t_stack	*head;
 	t_stack	*prev;
+	int 	*inputs;
 
 	i = 1;
 	head = NULL;
