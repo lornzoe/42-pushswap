@@ -6,7 +6,7 @@
 /*   By: lyanga <lyanga@student.42singapore.sg>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/18 05:33:07 by lyanga            #+#    #+#             */
-/*   Updated: 2025/10/02 11:00:43 by lyanga           ###   ########.fr       */
+/*   Updated: 2025/10/02 11:37:15 by lyanga           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,6 +110,8 @@ int	main(int argc, char **argv)
 	t_stack	*b;
 	size_t	size;
 
+	if (argc == 1)
+		return (0);
 	b = NULL;
 	a = parse_argv(argc, argv);
 	if (a != NULL && dupe_check(a))
