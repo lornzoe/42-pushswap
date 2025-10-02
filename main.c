@@ -6,7 +6,7 @@
 /*   By: lyanga <lyanga@student.42singapore.sg>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/18 05:33:07 by lyanga            #+#    #+#             */
-/*   Updated: 2025/10/01 19:11:55 by lyanga           ###   ########.fr       */
+/*   Updated: 2025/10/02 11:00:43 by lyanga           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,29 +39,12 @@ static t_stack	*parse_string(char *arg, t_stack *prev, t_stack **head)
 	free(split);
 	return (prev);
 }
-static int *create_array(int argc, char **argv)
-{
-	int	*tokens;
-	int	tlen;	
-
-		// for each argv
-		// 		run validate string
-
-		// if there's no error's so far
-		// for each argv
-		// 		do ft_split
-		//		iterate through ftsplit,
-		//		add each part of ftsplit (not null) to tokens
-		// use realloc? to expand tokens as needed  
-		// at the end, return tokens
-}
 
 static t_stack	*parse_argv(int argc, char **argv)
 {
 	int		i;
 	t_stack	*head;
 	t_stack	*prev;
-	int 	*inputs;
 
 	i = 1;
 	head = NULL;

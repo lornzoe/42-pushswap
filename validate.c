@@ -6,7 +6,7 @@
 /*   By: lyanga <lyanga@student.42singapore.sg>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/18 17:27:12 by lyanga            #+#    #+#             */
-/*   Updated: 2025/10/01 03:42:53 by lyanga           ###   ########.fr       */
+/*   Updated: 2025/10/02 11:00:27 by lyanga           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,12 +80,10 @@ int	validate_argv(int argc, char **argv)
 {
 	int			i;
 
-	if (argc == 2)
-		return (validate_string(argv[1]));
 	i = 1;
 	while (i < argc)
 	{
-		if (text_check(argv[i]) == 0 || value_check(argv[i]) == 0)
+		if (!validate_string(argv[i]))
 			return (0);
 		i++;
 	}
