@@ -6,7 +6,7 @@
 /*   By: lyanga <lyanga@student.42singapore.sg>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/18 17:27:12 by lyanga            #+#    #+#             */
-/*   Updated: 2025/10/02 11:00:27 by lyanga           ###   ########.fr       */
+/*   Updated: 2025/10/02 12:02:50 by lyanga           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,10 @@ int	validate_string(char *string)
 	split = ft_split(string, ' ');
 	ptr = split;
 	if (split[0] == NULL)
+	{
+		free_split(split);
 		return (0);
+	}
 	while (*ptr != NULL)
 	{
 		if (text_check(*ptr) == 0 || value_check(*ptr) == 0)
