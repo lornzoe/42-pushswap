@@ -6,7 +6,7 @@
 /*   By: lyanga <lyanga@student.42singapore.sg>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/18 15:18:07 by lyanga            #+#    #+#             */
-/*   Updated: 2025/09/23 09:01:27 by lyanga           ###   ########.fr       */
+/*   Updated: 2026/04/17 16:04:27 by lyanga           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ int	stack_biggest(t_stack *head)
 	biggest = -1;
 	while (head)
 	{
-		if (head->value > biggest)
+		if (head->index > biggest)
 			biggest = head->index;
 		head = head->next;
 	}
