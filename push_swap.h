@@ -6,7 +6,7 @@
 /*   By: lyanga <lyanga@student.42singapore.sg>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/18 05:09:16 by lyanga            #+#    #+#             */
-/*   Updated: 2025/09/23 08:55:42 by lyanga           ###   ########.fr       */
+/*   Updated: 2026/04/17 15:24:51 by lyanga           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,5 +61,6 @@ void	r_rotate_ab(t_stack **stack_a, t_stack **stack_b);
 void	sort_three(t_stack **head);
 void	sort_five(t_stack **a, t_stack **b);
 void	radix_sort(t_stack **a, t_stack **b);
+void	sort_magic(t_stack **a, t_stack **b);
 
 #endif
