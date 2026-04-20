@@ -6,7 +6,7 @@
 /*   By: lyanga <lyanga@student.42singapore.sg>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/18 05:33:07 by lyanga            #+#    #+#             */
-/*   Updated: 2025/10/02 11:37:15 by lyanga           ###   ########.fr       */
+/*   Updated: 2026/04/21 07:33:57 by lyanga           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,7 +123,7 @@ int	main(int argc, char **argv)
 		else if (!stack_issorted(a) && size <= 5)
 			sort_five(&a, &b);
 		else if (!stack_issorted(a) && size > 5)
-			radix_sort(&a, &b);
+			sort_magic(&a, &b);
 	}
 	else
 		print_error("Error\n");
