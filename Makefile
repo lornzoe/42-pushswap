@@ -6,7 +6,7 @@
 #    By: lyanga <lyanga@student.42singapore.sg>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/09/18 05:19:35 by lyanga            #+#    #+#              #
-#    Updated: 2026/04/22 07:34:05 by lyanga           ###   ########.fr        #
+#    Updated: 2026/04/22 07:47:10 by lyanga           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,7 @@ NAME_BONUS	=	$(OUTDIR)/checker
 
 # cc options
 CC			=	cc
-CFLAGS		=	-Wall -Werror -Wextra -g -O0
+CFLAGS		=	-Wall -Werror -Wextra
 DEBUG_FLAGS		=	-g -O0 
 # remove
 RM			=	rm -f
