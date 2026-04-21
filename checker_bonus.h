@@ -6,12 +6,12 @@
 /*   By: lyanga <lyanga@student.42singapore.sg>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/22 04:21:22 by lyanga            #+#    #+#             */
-/*   Updated: 2026/04/22 05:50:02 by lyanga           ###   ########.fr       */
+/*   Updated: 2026/04/22 07:30:44 by lyanga           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef  CHECKER_BONUS_H
-# define PUSH_SWAP_H
+#ifndef CHECKER_BONUS_H
+# define CHECKER_BONUS_H
 
 # include "libft.h"
 # include "ft_printf.h"
@@ -34,7 +34,7 @@ void	rotate(t_stack **head);
 void	r_rotate(t_stack **head);
 
 // line processing
-int		process_line(char *line, t_stack *a, t_stack *b);
+int		process_lines(t_stack *a, t_stack *b);
 
 // stack utils
 void	stack_del(t_stack *head);

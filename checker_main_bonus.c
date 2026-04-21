@@ -6,7 +6,7 @@
 /*   By: lyanga <lyanga@student.42singapore.sg>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/22 04:37:21 by lyanga            #+#    #+#             */
-/*   Updated: 2026/04/22 06:30:10 by lyanga           ###   ########.fr       */
+/*   Updated: 2026/04/22 07:31:56 by lyanga           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,6 @@ static t_stack	*parse_string(char *arg, t_stack *prev, t_stack **head)
 	free(split);
 	return (prev);
 }
-
 
 static t_stack	*parse_argv(int argc, char **argv)
 {
@@ -86,21 +85,16 @@ static int	dupe_check(t_stack *head)
 	return (1);
 }
 
-static void	cleanup(t_stack *a, t_stack *b, char *line)
+static void	cleanup(t_stack *a, t_stack *b)
 {
 	stack_del(a);
 	stack_del(b);
-	if (line)
-	{
-		free(line);
-	}
 }
 
-int main(int argc, char **argv)
+int	main(int argc, char **argv)
 {
 	t_stack	*a;
 	t_stack	*b;
-	char	*line;
 
 	if (argc == 1)
 		return (0);
@@ -108,22 +102,14 @@ int main(int argc, char **argv)
 	a = parse_argv(argc, argv);
 	if (a != NULL && dupe_check(a))
 	{
-		while (1)
-		{
-			line = ft_gnl(STDIN_FILENO);
-			if (!line)
-				break ;
-			if (!process_line(line, a, b))
-				return(print_error("Error\n"), cleanup(a, b, NULL), -1);
-			free(line);
-		}
+		if (!process_lines(a, b))
+			return (print_error("Error\n"), cleanup(a, b), -1);
 	}
 	else
-		return(print_error("Error\n"), cleanup(a, b, NULL), -1);
-	// after EOF (ctrl + d i guess)
+		return (print_error("Error\n"), cleanup(a, b), -1);
 	if (stack_issorted(a) && stack_size(b) == 0)
 		ft_printf("OK\n");
 	else
-	 	ft_printf("KO\n");
-	return (cleanup(a, b, line), 0);
+		ft_printf("KO\n");
+	return (cleanup(a, b), 0);
 }

@@ -6,14 +6,15 @@
 /*   By: lyanga <lyanga@student.42singapore.sg>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/22 05:17:52 by lyanga            #+#    #+#             */
-/*   Updated: 2026/04/22 06:44:11 by lyanga           ###   ########.fr       */
+/*   Updated: 2026/04/22 07:41:05 by lyanga           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "checker_bonus.h"
 #include "libft.h"
+#include <unistd.h>
 
-static int process_swap(t_stack **a, t_stack **b, char *line)
+static int	process_swap(t_stack **a, t_stack **b, char *line)
 {
 	if (ft_strncmp(line, "sa\n", 4) == 0)
 		swap(a);
@@ -29,7 +30,7 @@ static int process_swap(t_stack **a, t_stack **b, char *line)
 	return (1);
 }
 
-static int process_push(t_stack **a, t_stack **b, char *line)
+static int	process_push(t_stack **a, t_stack **b, char *line)
 {
 	if (ft_strncmp(line, "pa\n", 4) == 0)
 		push(b, a);
@@ -40,7 +41,7 @@ static int process_push(t_stack **a, t_stack **b, char *line)
 	return (1);
 }
 
-static int process_rotate(t_stack **a, t_stack **b, char *line)
+static int	process_rotate(t_stack **a, t_stack **b, char *line)
 {
 	if (ft_strncmp(line, "ra\n", 4) == 0)
 		rotate(a);
@@ -65,13 +66,27 @@ static int process_rotate(t_stack **a, t_stack **b, char *line)
 	return (1);
 }
 
-int	process_line(char *line, t_stack *a, t_stack *b)
+int	process_lines(t_stack *a, t_stack *b)
 {
-	if (process_swap(&a, &b, line))
-		return (1);
-	if (process_push(&a, &b, line))
-		return (1);
-	if (process_rotate(&a, &b, line))
-		return (1);
-	return (0);
+	char	*line;
+	int		flag;
+
+	flag = 1;
+	while (flag)
+	{
+		line = ft_gnl(STDIN_FILENO);
+		if (!line)
+			break ;
+		if (process_swap(&a, &b, line))
+			flag = 1;
+		else if (process_push(&a, &b, line))
+			flag = 1;
+		else if (process_rotate(&a, &b, line))
+			flag = 1;
+		else
+			flag = 0;
+		free(line);
+		line = NULL;
+	}
+	return (flag);
 }
