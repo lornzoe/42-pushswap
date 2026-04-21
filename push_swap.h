@@ -6,7 +6,7 @@
 /*   By: lyanga <lyanga@student.42singapore.sg>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/18 05:09:16 by lyanga            #+#    #+#             */
-/*   Updated: 2026/04/21 13:18:41 by lyanga           ###   ########.fr       */
+/*   Updated: 2026/04/21 20:09:55 by lyanga           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,12 @@ void	r_rotate_ab(t_stack **stack_a, t_stack **stack_b);
 void	sort_three(t_stack **head);
 void	sort_five(t_stack **a, t_stack **b);
 void	radix_sort(t_stack **a, t_stack **b);
-void	sort_magic(t_stack **a, t_stack **b);
+
+// sort for >5
+void	sort_large(t_stack **a, t_stack **b);
+// utils
+void	push_chunks(t_stack **a, t_stack **b);
+void	do_rotations(t_stack **a, t_stack **b, int a_moves, int b_moves);
+int		calculate_cost(int a_moves, int b_moves);
 
 #endif

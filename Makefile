@@ -6,7 +6,7 @@
 #    By: lyanga <lyanga@student.42singapore.sg>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/09/18 05:19:35 by lyanga            #+#    #+#              #
-#    Updated: 2026/04/17 17:15:32 by lyanga           ###   ########.fr        #
+#    Updated: 2026/04/21 20:05:47 by lyanga           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -34,7 +34,8 @@ DIR_LIBFT =	libft/
 DIR_LIBFT_HEADERS =	libft/headers/
 LIBFT	=	$(DIR_LIBFT)libft.a
 
-PUSHSWAP_SRCS	=	main.c push.c swap.c rotate.c r_rotate.c stack_utils.c sort.c validate.c error.c test_1.c
+PUSHSWAP_SRCS	=	main.c push.c swap.c rotate.c r_rotate.c stack_utils.c sort.c validate.c error.c \
+					sort_2.c sort_utils.c
 OBJS_PUSHSWAP	=	$(addprefix $(DIR_OBJS), $(PUSHSWAP_SRCS:.c=.o))
 
 .PHONY: all clean fclean re libft
