@@ -1,9 +1,15 @@
 #!/bin/bash
 
-ITERATIONS=50
+# This script utilises a custom rule (qre) that basically calls re on push_swap only and not libft (since there's no point to rebuilding libft)
+# for reference:
+# quickclean:
+# 	@$(RM) $(OBJS_PUSHSWAP)
+# qre: quickclean all
+
+ITERATIONS=100
 
 MIN_CHUNK_100=10
-MAX_CHUNK_100=30
+MAX_CHUNK_100=100
 
 MIN_CHUNK_500=50
 MAX_CHUNK_500=150
@@ -78,6 +84,6 @@ echo ""
 echo "=========================================="
 echo "🏆 OPTIMAL CHUNK SIZES FOUND"
 echo "=========================================="
-echo "For 100 elements: CHUNK100 = $best_chunk_100 (Avg Moves: $best_avg_100)"
-echo "For 500 elements: CHUNK500 = $best_chunk_500 (Avg Moves: $best_avg_500)"
+echo "For 100 elements: CHUNK100 = $best_chunk_100 , Avg Moves: $best_avg_100"
+echo "For 500 elements: CHUNK500 = $best_chunk_500 , Avg Moves: $best_avg_500"
 echo "=========================================="

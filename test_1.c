@@ -2,10 +2,10 @@
 #include <limits.h>
 
 #ifndef CHUNK100
-    #define CHUNK100 20
+    #define CHUNK100 30
 #endif
 #ifndef CHUNK500
-    #define CHUNK500 100
+    #define CHUNK500 90
 #endif
 
 void push_chunks(t_stack **a, t_stack **b)
