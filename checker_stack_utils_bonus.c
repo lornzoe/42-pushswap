@@ -1,0 +1,72 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   checker_stack_utils_bonus.c                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: lyanga <lyanga@student.42singapore.sg>     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/04/22 04:36:28 by lyanga            #+#    #+#             */
+/*   Updated: 2026/04/22 04:36:39 by lyanga           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "checker_bonus.h"
+
+void	stack_del(t_stack *head)
+{
+	t_stack	*tmp;
+
+	while (head)
+	{
+		tmp = head;
+		head = head->next;
+		free(tmp);
+	}
+}
+
+t_stack	*stack_last(t_stack *head)
+{
+	if (!head)
+		return (NULL);
+	while (head->next)
+		head = head->next;
+	return (head);
+}
+
+size_t	stack_size(t_stack *head)
+{
+	size_t	size;
+
+	size = 0;
+	while (head)
+	{
+		size++;
+		head = head->next;
+	}
+	return (size);
+}
+
+int	stack_biggest(t_stack *head)
+{
+	int	biggest;
+
+	biggest = -1;
+	while (head)
+	{
+		if (head->index > biggest)
+			biggest = head->index;
+		head = head->next;
+	}
+	return (biggest);
+}
+
+int	stack_issorted(t_stack *head)
+{
+	while (head && head->next)
+	{
+		if (head->value > head->next->value)
+			return (0);
+		head = head->next;
+	}
+	return (1);
+}
