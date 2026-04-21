@@ -6,7 +6,7 @@
 /*   By: lyanga <lyanga@student.42singapore.sg>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/18 05:09:16 by lyanga            #+#    #+#             */
-/*   Updated: 2026/04/17 15:24:51 by lyanga           ###   ########.fr       */
+/*   Updated: 2026/04/21 13:18:41 by lyanga           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,16 @@
 
 # include "libft.h"
 # include "ft_printf.h"
+# include <limits.h>
+
+// custom defines
+# ifndef CHUNK100
+#  define CHUNK100 30
+# endif
+
+# ifndef CHUNK500
+#  define CHUNK500 90
+# endif
 
 // struct
 typedef struct s_stack

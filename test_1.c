@@ -1,40 +1,33 @@
 #include "push_swap.h"
-#include <limits.h>
-
-#ifndef CHUNK100
-    #define CHUNK100 30
-#endif
-#ifndef CHUNK500
-    #define CHUNK500 90
-#endif
+#include <stdio.h>
 
 void push_chunks(t_stack **a, t_stack **b)
 {
-    int i;
-    int size;
-    int range;
+	int i;
+	int size;
+	int range;
 
-    i = 0;
-    size = stack_size(*a);
-    range = CHUNK100;
-    if (size > 100)
-        range = CHUNK500;
-    while (stack_size(*a) > 3)
-    {
-        if ((*a)->index <= i)
-        {
-            push_b(a, b);
-            i++;
-        }
-        else if ((*a)->index <= (i + range))
-        {
-            push_b(a, b);
-            rotate_b(b);
-            i++;
-        }
-        else
-            rotate_a(a);
-    }
+	i = 0;
+	size = stack_size(*a);
+	range = CHUNK100;
+	if (size > 100)
+		range = CHUNK500;
+	while (stack_size(*a) > 3)
+	{
+		if ((*a)->index <= i)
+		{
+			push_b(a, b);
+			i++;
+		}
+		else if ((*a)->index <= (i + range))
+		{
+			push_b(a, b);
+			rotate_b(b);
+			i++;
+		}
+		else
+			rotate_a(a);
+	}
 }
 
 static int pos_of_smallest(t_stack *s)
@@ -59,103 +52,160 @@ static int pos_of_smallest(t_stack *s)
 	return (best_pos);
 }
 
-static int find_target_pos(t_stack *a_stack, int b_idx)
+static int find_target_pos(t_stack *a, int b_index)
 {
-	int pos = 0;
-	int best_pos = -1;
-	int best_idx = -1;
-	t_stack *cur = a_stack;
+	int pos;
+	int best_pos;
+	int best_index;
+	t_stack *curr;
 
-	if (!cur)
-		return (0);
-	while (cur)
+	pos = 0;
+	best_pos = -1;
+	best_index = -1;
+	curr = a;
+	while (curr)
 	{
-		if (cur->index > b_idx)
+		if (curr->index > b_index)
 		{
-			if (best_pos == -1 || cur->index < best_idx)
+			if (best_pos == -1 || curr->index < best_index)
 			{
-				best_idx = cur->index;
+				best_index = curr->index;
 				best_pos = pos;
 			}
 		}
-		cur = cur->next;
+		curr = curr->next;
 		pos++;
 	}
 	if (best_pos != -1)
 		return (best_pos);
-	return (pos_of_smallest(a_stack));
+	return (pos_of_smallest(a));
 }
 
-static void do_rotations(t_stack **a_stack, t_stack **b_stack, int a_moves, int b_moves)
+static void do_rotations(t_stack **a, t_stack **b, int a_moves, int b_moves)
 {
-	while (a_moves > 0 && b_moves > 0)
+	while (a_moves > 0 && b_moves > 0 && a_moves-- && b_moves--)
+		rotate_ab(a, b);
+	while (a_moves < 0 && b_moves < 0 && a_moves++ && b_moves++)
+		r_rotate_ab(a, b);
+	while (a_moves > 0 && a_moves--)
+		rotate_a(a);
+	while (a_moves < 0 && a_moves++)
+		r_rotate_a(a);
+	while (b_moves > 0 && b_moves--)
+		rotate_b(b);
+	while (b_moves < 0 && b_moves++)
+		r_rotate_b(b);
+}
+static void	rotate_till_ordered(t_stack **a)
+{
+	int min_pos;
+	int size;
+
+	min_pos = pos_of_smallest(*a);
+	size = (int)stack_size(*a);
+	if (stack_size(*a) > 0)
 	{
-		rotate_ab(a_stack, b_stack);
-		a_moves--;
-		b_moves--;
-	}
-	while (a_moves < 0 && b_moves < 0)
-	{
-		r_rotate_ab(a_stack, b_stack);
-		a_moves++;
-		b_moves++;
-	}
-	while (a_moves > 0)
-	{
-		rotate_a(a_stack);
-		a_moves--;
-	}
-	while (a_moves < 0)
-	{
-		r_rotate_a(a_stack);
-		a_moves++;
-	}
-	while (b_moves > 0)
-	{
-		rotate_b(b_stack);
-		b_moves--;
-	}
-	while (b_moves < 0)
-	{
-		r_rotate_b(b_stack);
-		b_moves++;
+		if (min_pos <= size / 2)
+			while (min_pos-- > 0)
+				rotate_a(a);
+		else
+			while (min_pos++ < size)
+				r_rotate_a(a);
 	}
 }
 
+static int	calculate_cost(int a_mv, int b_mv)
+{
+	int	abs_a;
+	int	abs_b;
+
+	if (a_mv >= 0 && b_mv >= 0)
+	{
+		if (a_mv > b_mv)
+			return (a_mv);
+		return (b_mv);
+	}
+	if (a_mv <= 0 && b_mv <= 0)
+	{
+		if (a_mv < b_mv)
+			return (-a_mv);
+		return (-b_mv);
+	}
+	abs_a = a_mv;
+	if (abs_a < 0)
+		abs_a = -a_mv;
+	abs_b = b_mv;
+	if (abs_b < 0)
+		abs_b = -b_mv;
+	return (abs_a + abs_b);
+}
+
+static t_stack	*get_nth_node(t_stack **s, int n)
+{
+	t_stack *tmp;
+	int i = 0;
+
+	tmp = *s;
+	while (i < n && tmp)
+	{
+		tmp = tmp->next;
+		i++;
+	}
+	return (tmp);
+}
+
+static void get_best_moves(t_stack **a, t_stack **b, int *best_a, int *best_b)
+{
+	int i;
+	int target_pos;
+	int best_cost;
+	int size[2];
+	int cost;
+	
+	i = 0;
+	while (i < stack_size(*b))
+	{
+		target_pos = find_target_pos(*a, get_nth_node(b, i)->index);
+		int a_moves = 0;
+		if (target_pos <= a_size / 2)
+			a_moves = target_pos;
+		else
+			a_moves = target_pos - a_size;
+		int b_moves = 0;
+		if (i <= b_size / 2)
+			b_moves = i;
+		else
+			b_moves = i - b_size;
+		int cost = calculate_cost(a_moves, b_moves);
+		if (cost < best_cost)
+		{
+			best_cost = cost;
+			*best_a = a_moves;
+			*best_b = b_moves;
+		}
+		i++;
+	}
+}
 void	sort_magic(t_stack **a, t_stack **b)
 {
-	// int j = 0;
-	// int size = (int)stack_size(*a);
+	int best_cost;
+	int best_a_moves;
+	int best_b_moves;
+	int b_size;
+	int a_size;
 
-	// while (j < size - 2)
-	// {
-	// 	push_b(a, b);
-	// 	j++;
-	// }
-
-	
-    push_chunks(a, b);
+	push_chunks(a, b);
 	sort_three(a);
-    while (stack_size(*b) > 0)
+	while (stack_size(*b) > 0)
 	{
-		int best_cost = INT_MAX;
-		int best_a_moves = 0;
-		int best_b_moves = 0;
-		int b_size = (int)stack_size(*b);
-		int a_size = (int)stack_size(*a);
-
+		best_cost = INT_MAX;
+		best_a_moves = 0;
+		best_b_moves = 0;
+		b_size = (int)stack_size(*b);
+		a_size = (int)stack_size(*a);
 		for (int i = 0; i < b_size; ++i)
 		{
-			t_stack *tmp = *b;
-			int k = 0;
-			while (k < i && tmp)
-			{
-				tmp = tmp->next;
-				k++;
-			}
-			if (!tmp)
-				continue;
-			int b_idx = tmp->index;
+			int b_idx = get_nth_node(b, i)->index;
 			int target_pos = find_target_pos(*a, b_idx);
 
 			int a_moves = 0;
@@ -163,21 +213,12 @@ void	sort_magic(t_stack **a, t_stack **b)
 				a_moves = target_pos;
 			else
 				a_moves = target_pos - a_size;
-
 			int b_moves = 0;
 			if (i <= b_size / 2)
 				b_moves = i;
 			else
 				b_moves = i - b_size;
-
-			int cost;
-			if (a_moves >= 0 && b_moves >= 0)
-				cost = (a_moves > b_moves) ? a_moves : b_moves;
-			else if (a_moves <= 0 && b_moves <= 0)
-				cost = ((-a_moves) > (-b_moves)) ? -a_moves : -b_moves;
-			else
-				cost = (a_moves >= 0 ? a_moves : -a_moves) + (b_moves >= 0 ? b_moves : -b_moves);
-
+			int cost = calculate_cost(a_moves, b_moves);
 			if (cost < best_cost)
 			{
 				best_cost = cost;
@@ -185,20 +226,8 @@ void	sort_magic(t_stack **a, t_stack **b)
 				best_b_moves = b_moves;
 			}
 		}
-
 		do_rotations(a, b, best_a_moves, best_b_moves);
 		push_a(a, b);
 	}
-
-	if (stack_size(*a) > 0)
-	{
-		int min_pos = pos_of_smallest(*a);
-		int a_sz = (int)stack_size(*a);
-		if (min_pos <= a_sz / 2)
-			while (min_pos-- > 0)
-				rotate_a(a);
-		else
-			while (min_pos++ < a_sz)
-				r_rotate_a(a);
-	}
+	rotate_till_ordered(a);
 }
