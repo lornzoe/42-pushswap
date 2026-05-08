@@ -6,7 +6,7 @@
 #    By: lyanga <lyanga@student.42singapore.sg>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/09/18 05:19:35 by lyanga            #+#    #+#              #
-#    Updated: 2026/04/22 07:47:10 by lyanga           ###   ########.fr        #
+#    Updated: 2026/05/08 20:23:09 by lyanga           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -57,7 +57,7 @@ $(NAME): libft $(OBJS_PUSHSWAP)
 libft: 
 	@make -C $(DIR_LIBFT) DEBUG=$(DEBUG)
 
-$(OBJS_PUSHSWAP): %.o: %.c
+$(OBJS_PUSHSWAP): %.o: %.c $(PUSHSWAP_HDR)
 	@echo "Compiling $<..."
 	@$(CC) $(CFLAGS) -I$(DIR_HEADERS) -I$(DIR_LIBFT_HEADERS) -c $< -o $@
 
@@ -73,7 +73,7 @@ fclean: clean
 	@$(RM) $(NAME)
 	@$(RM) $(NAME_BONUS)
 
-$(OBJS_CHECKER): %.o: %.c
+$(OBJS_CHECKER): %.o: %.c $(CHECKER_HDR)
 	@echo "Compiling $<..."
 	@$(CC) $(CFLAGS) -I$(DIR_HEADERS) -I$(DIR_LIBFT_HEADERS) -c $< -o $@
 
