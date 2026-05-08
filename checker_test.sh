@@ -45,8 +45,8 @@ test_stack "1 2 2"
 test_stack "1 2 cat"
 
 # 5. Test Random Stacks (shuf requires coreutils)
-for i in {1..5}
+for i in {1..25}
 do
-    RANDOM_STACK=$(shuf -i 1-100 -n 10 | tr '\n' ' ')
+    RANDOM_STACK=$(shuf -i 1-100 -n 50 | tr '\n' ' ')
     test_stack $RANDOM_STACK
 done

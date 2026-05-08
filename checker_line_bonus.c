@@ -6,13 +6,12 @@
 /*   By: lyanga <lyanga@student.42singapore.sg>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/22 05:17:52 by lyanga            #+#    #+#             */
-/*   Updated: 2026/04/22 07:41:05 by lyanga           ###   ########.fr       */
+/*   Updated: 2026/05/08 21:13:59 by lyanga           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "checker_bonus.h"
 #include "libft.h"
-#include <unistd.h>
 
 static int	process_swap(t_stack **a, t_stack **b, char *line)
 {
@@ -74,7 +73,7 @@ int	process_lines(t_stack *a, t_stack *b)
 	flag = 1;
 	while (flag)
 	{
-		line = ft_gnl(STDIN_FILENO);
+		line = ft_gnl_mandatory(STDIN_FILENO);
 		if (!line)
 			break ;
 		if (process_swap(&a, &b, line))
